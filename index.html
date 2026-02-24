@@ -9,33 +9,45 @@ body{
   font-family: Arial;
   background:#eaf3fb;
   margin:0;
-  padding:30px;
 }
 
-.container{
-  max-width:900px;
-  margin:auto;
-}
-
-h2{
+/* Header */
+.header{
+  background:#1f4f7a;
+  color:white;
+  padding:16px;
   text-align:center;
-  color:#1f4f7a;
+  font-size:18px;
+  letter-spacing:1px;
+}
+
+/* Compact container */
+.container{
+  max-width:650px;
+  margin:25px auto;
+  padding:0 15px;
+}
+
+label{
+  font-weight:bold;
+  display:block;
+  margin-bottom:4px;
 }
 
 input, textarea{
   width:100%;
-  padding:8px;
-  margin-bottom:10px;
+  padding:9px;
+  margin-bottom:12px;
   border:1px solid #ccc;
-  border-radius:4px;
+  border-radius:5px;
 }
 
 button{
-  padding:8px 14px;
+  padding:9px 16px;
   background:#2b78c5;
   color:white;
   border:none;
-  border-radius:4px;
+  border-radius:5px;
   cursor:pointer;
 }
 
@@ -43,34 +55,30 @@ button:hover{
   background:#1f5fa0;
 }
 
-.staff-box{
+.card{
   background:white;
   padding:20px;
-  border-radius:8px;
-  margin-bottom:25px;
-  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  border-radius:10px;
+  box-shadow:0 3px 8px rgba(0,0,0,.12);
 }
 
 .section{
-  margin-top:15px;
-  padding-top:10px;
-  border-top:1px dashed #bbb;
+  margin-top:20px;
 }
 
-.output{
+.subcard{
   background:#f7f9fb;
-  padding:10px;
-  margin-top:6px;
-  white-space:pre-wrap;
-  border-radius:4px;
+  padding:12px;
+  border-radius:8px;
   border:1px solid #ddd;
+  margin-top:8px;
+  white-space:pre-wrap;
 }
 
 .preview{
   background:white;
   padding:15px;
-  margin-top:20px;
-  border-radius:8px;
+  border-radius:10px;
   box-shadow:0 2px 6px rgba(0,0,0,.1);
 }
 
@@ -81,39 +89,42 @@ button:hover{
 
 .signature{
   position:fixed;
-  bottom:15px;
+  bottom:12px;
   left:50%;
   transform:translateX(-50%);
-  font-size:12px;
+  font-size:11px;
   color:#777;
   font-style:italic;
-  opacity:0.8;
+  opacity:0.7;
 }
 </style>
 </head>
 
 <body>
 
+<div class="header">IPGKIK PORTAL — STAFF GENERATOR</div>
+
 <div class="container">
 
-<h2>IPGKIK Portal - Staff Generator</h2>
+<div class="card">
 
-<div class="staff-box">
+<label>Nama</label>
+<input id="nama">
 
-Nama:<input id="nama">
-Jawatan:<input id="jawatan">
+<label>Jawatan</label>
+<input id="jawatan">
 
-Link Gambar:
+<label>Link Gambar</label>
 <input id="gambar" placeholder="Jika tiada: images/IPGKIK/Gambar/kosong.png">
 <div class="small">Jika tiada gambar, copy & paste: images/IPGKIK/Gambar/kosong.png</div>
 
-Kelulusan Akademik (satu baris satu):
+<label>Kelulusan Akademik (satu baris satu)</label>
 <textarea id="akademik"></textarea>
 
-Kepakaran:
+<label>Kepakaran</label>
 <input id="kepakaran">
 
-E-mel:
+<label>E-mel</label>
 <input id="email">
 
 <button onclick="generate()">Generate</button>
@@ -121,13 +132,13 @@ E-mel:
 <div class="section">
 <h4>DEPAN (HTML)</h4>
 <button onclick="copy('front')">Copy</button>
-<div class="output" id="front"></div>
+<div class="subcard" id="front"></div>
 </div>
 
 <div class="section">
 <h4>BELAKANG (HTML)</h4>
 <button onclick="copy('back')">Copy</button>
-<div class="output" id="back"></div>
+<div class="subcard" id="back"></div>
 </div>
 
 <div class="section">
@@ -156,23 +167,19 @@ akadRaw.forEach(a=>{
  if(a.trim()!="") akadList+=`<li>${a}</li>`;
 });
 
-let depan=`<img src="${gambar}" style="display:block;margin:0 auto;padding-bottom:10px;width:250px;height:300px;object-fit:cover;">
+let depan=`<img src="${gambar}" style="display:block;margin:0 auto 10px;width:220px;height:280px;object-fit:cover;">
 
 <h3 style="text-align:center;">${nama}</h3>
 <h3 style="font-weight:500;text-align:center;">${jawatan}</h3>`;
 
-let belakang=`<p style="text-align:left;"><strong>KELULUSAN AKADEMIK:</strong></p>
-<ul style="text-align:left;">
-${akadList}
-</ul>
+let belakang=`<p><strong>KELULUSAN AKADEMIK:</strong></p>
+<ul>${akadList}</ul>
 
-<p style="text-align:left;"><strong>KEPAKARAN:</strong> ${kep}</p>
-<p style="text-align:left;"><strong>E-MEL:</strong> ${email}</p>`;
+<p><strong>KEPAKARAN:</strong> ${kep}</p>
+<p><strong>E-MEL:</strong> ${email}</p>`;
 
 document.getElementById("front").textContent=depan;
 document.getElementById("back").textContent=belakang;
-
-// LIVE PREVIEW
 document.getElementById("preview").innerHTML=depan+belakang;
 }
 
