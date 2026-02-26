@@ -172,11 +172,16 @@ let depan=`<img src="${gambar}" style="display:block;margin:0 auto 10px;width:22
 <h3 style="text-align:center;">${nama}</h3>
 <h3 style="font-weight:500;text-align:center;">${jawatan}</h3>`;
 
-let belakang=`<p><strong>KELULUSAN AKADEMIK:</strong></p>
-<ul>${akadList}</ul>
+/* FIX ALIGNMENT DI SINI */
+let belakang=`<div style="text-align:left;">
+<p><strong>KELULUSAN AKADEMIK:</strong></p>
+<ul style="margin:5px 0 10px 18px;">
+${akadList}
+</ul>
 
 <p><strong>KEPAKARAN:</strong> ${kep}</p>
-<p><strong>E-MEL:</strong> ${email}</p>`;
+<p><strong>E-MEL:</strong> ${email}</p>
+</div>`;
 
 document.getElementById("front").textContent=depan;
 document.getElementById("back").textContent=belakang;
